@@ -15,7 +15,10 @@ public class Grafos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("hello world");
+//        Aresta teste = new Aresta(1, 2);
+//        System.out.println(teste.toString());
+        Grafo g = new Grafo();
+        g.lerTxtLaplaciana("/home/aluno/teste.txt");
     }
     
 }
