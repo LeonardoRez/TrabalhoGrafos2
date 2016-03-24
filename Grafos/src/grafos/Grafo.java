@@ -12,13 +12,13 @@ import java.util.logging.Logger;
 
 public class Grafo {
     private List<Integer> V;
-    private List<Aresta> E;
+    
     private int modV;
     private int modE;
 
     public Grafo() {
         V = new ArrayList<Integer>();
-        E = new ArrayList<Aresta>();
+        
         modE = 0;
         modV = 0;
     }
@@ -38,23 +38,28 @@ public class Grafo {
             while ((c = s.read()) != -1){
                 switch(c){
                     case 91:
-                        System.out.println("[");
+                        System.out.print("[ ");
                         break;
                     case 93:
-                        System.out.println("]");
+                        System.out.print("]");
                         break;
                     case 45:
-                        System.out.println("-1");
-                        c = s.read();
+                        System.out.print("-1 ");
+                        s.read();
                         break;
                     default:
                         if(c>47 && c<58){
-                            String temp = ""+c;
-                            while((c = s.read())!= 32){
-                                temp += c;
+                            char cTemp = (char) c;
+                            String temp = ""+cTemp;
+                            while((c = s.read())!= 32 && c != 93){
+                                cTemp = (char) c;
+                                temp += cTemp;
                             }
-                            System.out.println(temp);
+                            System.out.print(temp+" ");
+                            if(c == 93)
+                                System.out.println("]");
                         }
+                        break;
                 }
                        
             }
