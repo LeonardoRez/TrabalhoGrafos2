@@ -19,6 +19,8 @@ public class Grafos {
 //        System.out.println(teste.toString());
         Grafo g = new Grafo();
         g.lerTxtLaplaciana("C:/Users/Leonardo/Desktop/teste.txt");
+        g.printArestas();
+        g.printVertices();
     }
-    
+
 }
