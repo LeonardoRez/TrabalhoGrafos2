@@ -18,9 +18,7 @@ public class Grafos {
 //        Aresta teste = new Aresta(1, 2);
 //        System.out.println(teste.toString());
         Grafo g = new Grafo();
-        g.lerTxtLaplaciana("C:/Users/Leonardo/Desktop/teste.txt");
-        g.printArestas();
-        g.printVertices();
+        g.menu();
     }
 
 }
