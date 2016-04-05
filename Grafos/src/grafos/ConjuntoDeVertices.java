@@ -21,17 +21,17 @@ public class ConjuntoDeVertices {
 
     public void addVertice(Vertice v) {//adiciona um vertice se ele não estiver na lista
 
-        if (confereVertice(v.getVertice())) {
-            System.out.println("O vertice " + v.getVertice() + " já existe na lista!");
+        if (confereVertice(v.getId())) {
+            System.out.println("O vertice " + v.getId() + " já existe na lista!");
         } else {
             lista.add(v);
         }
     }
 
-    public boolean confereVertice(String v) {//procura o vertice na lista
+    public boolean confereVertice(int v) {//procura o vertice na lista
         int i;
         for (i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getVertice().equalsIgnoreCase(v)) {
+            if (lista.get(i).getId()==v) {
                 return true;//se já estiver na lista
             }
         }
@@ -42,16 +42,16 @@ public class ConjuntoDeVertices {
         String s = "V = {";
         int quant = lista.size();
         for (int i = 0; i < (quant - 1); i++) {
-            s += lista.get(i).getVertice() + ";";
+            s += lista.get(i).getId() + ";";
         }
-        s += lista.get((quant - 1)).getVertice() + "}";
+        s += lista.get((quant - 1)).getId() + "}";
         System.out.println(s);
     }
 
-    public void printVizinhos(String vertice) {
+    public void printVizinhos(int vertice) {
         Vertice v = null;
         for (Vertice vert : lista) { //procurando vertice na lista
-            if (vert.getVertice().equalsIgnoreCase(vertice)) {
+            if (vert.getId()==vertice) {
                 v = vert;
             }
         }
@@ -80,7 +80,7 @@ public class ConjuntoDeVertices {
     public void printGraus() {
         System.out.println("Grau dos vértices:");
         for (Vertice v : lista) {
-            System.out.println("Vertice " + v.getVertice() + "= " + v.getGrau());
+            System.out.println("Vertice " + v.getId() + "= " + v.getGrau());
         }
     }
 
@@ -103,9 +103,9 @@ public class ConjuntoDeVertices {
         });
     }
     
-    public int getGrau(String vertice){
+    public int getGrau(int vertice){
         for(Vertice v:lista){
-            if(v.getVertice().equalsIgnoreCase(vertice))
+            if(v.getId()==vertice)
                 return v.getGrau();
         }
         return 0;

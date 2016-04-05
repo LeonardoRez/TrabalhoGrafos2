@@ -5,27 +5,15 @@ import java.util.List;
 
 public class Vertice {
 
-    private String vertice;
     private int id;
     private int grau;
     private List<Vertice> vizinhanca;
 
-    public Vertice(String vertice, int id) {
-        this.vertice = vertice;
-        this.id = id;
-        this.grau=0;
-        vizinhanca = new ArrayList<>();
-    }
-
     public Vertice(int id) {
-        this.vertice = "" + id;
+       
         this.id = id;
         this.grau=0;
         vizinhanca = new ArrayList<>();
-    }
-
-    public String getVertice() {
-        return vertice;
     }
 
     public int getId() {

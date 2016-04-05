@@ -82,30 +82,49 @@ public class Grafo {
     public void lerManual() {
         limparDados();
         Scanner s = new Scanner(System.in);
-        do {
-            System.out.println("Quantidade de vertices:");
-            modV = s.nextInt();
-        } while (modV <= 0);
-        for (int i = 1; i <= modV; i++) {
-            V.addVertice(new Vertice(i));
-        }
-        System.out.println("O programa irá ler as arestas do grafo.\n--->Só são permitidos números<---");
-        int v1, v2;
-        System.out.print("v1: ");
-        v1 = s.nextInt();
-        while (v1 != (-1)) {
-            System.out.print("v2: ");
-            v2 = s.nextInt();
-            if (V.confereVertice(Integer.toString(v1)) && V.confereVertice(Integer.toString(v2))) {
-                E.addAresta(v1, v2);//adiciona a aresta
+        System.out.println("Digite o conjunto de vértices: (ex: V={1;2})");
+        System.out.print("V={");
+        String conj = s.nextLine();
+        int aux;
+        String temp;
+        for (int i = 0; i < (conj.length()); i++) {
+            if (conj.charAt(i) >= '0' && conj.charAt(i) <= '9') {
+                temp = "" + conj.charAt(i);
+                while (conj.charAt(i + 1) != ';' && conj.charAt(i + 1) != '}') {
+                    temp += conj.charAt(i + 1);
+                    i++;
+                }
+                aux = Integer.parseInt(temp);
+                V.addVertice(new Vertice(aux));
             }
-            System.out.println("Digite o valor de v1 ou -1 para sair");
-            System.out.print("v1: ");
-            v1 = s.nextInt();
         }
-        this.modE = E.getModE();
-        setGraus();
-
+        System.out.println("Digite o conjunto de arestas: (ex: E={(1,2);(1,3)})");
+        System.out.print("E={");
+        conj = s.nextLine();
+        int aux2;
+        for (int i = 0; i < (conj.length()); i++) {
+            if (conj.charAt(i) == '(') {
+                temp = "";
+                while (conj.charAt(i + 1) != ',') {
+                    temp += conj.charAt(i + 1);
+                    i++;
+                }
+                aux = Integer.parseInt(temp);
+                i++;
+                temp="";
+                while (conj.charAt(i + 1) != ')') {
+                    temp += conj.charAt(i + 1);
+                    i++;
+                }
+                aux2 = Integer.parseInt(temp);
+                if(V.confereVertice(aux) && V.confereVertice(aux2)){
+                    E.addAresta(aux, aux2);
+                }
+            }
+        }
+        modE=E.getModE();
+        modV=V.getModV();
+        V.setGraus();
     }
 
     public void limparDados() {
@@ -124,11 +143,12 @@ public class Grafo {
         V.printLista();
     }
 
-    public void printVizinhos(String vertice) {
+    public void printVizinhos(int vertice) {
         V.printVizinhos(vertice);
     }
-    public void printGrauVertice(String v){
-        System.out.println("Grau do vértice "+v+": "+V.getGrau(v));
+
+    public void printGrauVertice(int v) {
+        System.out.println("Grau do vértice " + v + ": " + V.getGrau(v));
     }
 
     public void printGrauDosVertices() {
@@ -161,7 +181,7 @@ public class Grafo {
             System.out.print("\n|");
             for (int j = 1; j <= modV; j++) {
                 if (i == j) {
-                    System.out.print(" " + V.getGrau("" + i) + " ");
+                    System.out.print(" " + V.getGrau(i) + " ");
                 } else {
                     System.out.print(" 0 ");
                 }
@@ -177,7 +197,7 @@ public class Grafo {
             System.out.print("\n|");
             for (int j = 1; j <= modV; j++) {
                 if (i == j) {
-                    System.out.print(" " + V.getGrau("" + i) + " ");
+                    System.out.print(" " + V.getGrau(i) + " ");
                 } else if (E.saoAdjacentes(i, j)) {
                     System.out.print("-1 ");
                 } else {
@@ -221,7 +241,8 @@ public class Grafo {
             opcao = scanner.nextInt();
             switch (opcao) {
                 case 1:
-                    while(!lerTxtLaplaciana()){}
+                    while (!lerTxtLaplaciana()) {
+                    }
                     opcao = 0;
                     break;
                 case 2:
@@ -246,13 +267,13 @@ public class Grafo {
             System.out.println("7 - Mostrar vizinhança do vértice");
             opcao = scanner.nextInt();
             switch (opcao) {
-                case 0: 
+                case 0:
                     break;
                 case 1:
                     printVertices();
                     printArestas();
-                    System.out.println("|E| = "+getModE());
-                    System.out.println("|V| = "+getModV());
+                    System.out.println("|E| = " + getModE());
+                    System.out.println("|V| = " + getModV());
                     break;
                 case 2:
                     printAdijacencia();
@@ -269,14 +290,14 @@ public class Grafo {
                 case 6:
                     Scanner s1 = new Scanner(System.in);
                     System.out.print("Vertice:");
-                    String vertice = s1.nextLine();
+                    int vertice = s1.nextInt();
                     System.out.println("");
                     printGrauVertice(vertice);
                     break;
                 case 7:
                     Scanner s2 = new Scanner(System.in);
                     System.out.print("Vertice:");
-                    String vertice2 = s2.nextLine();
+                    int vertice2 = s2.nextInt();
                     System.out.println("");
                     printVizinhos(vertice2);
                     break;
